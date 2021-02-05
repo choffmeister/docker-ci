@@ -1,5 +1,5 @@
 IMAGE=choffmeister/ci
-TAG=1.0.0
+TAG=1.0.1
 
 build:
 	docker build --pull -t $(IMAGE):$(TAG) -f Dockerfile .

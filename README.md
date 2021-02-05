@@ -1,9 +1,8 @@
-# airfocus-ci
-
-[![HTML](https://pkg.airfocus.dev/api/registries/docker/packages/airfocus%2Fairfocus-ci/badge.svg)](https://pkg.airfocus.dev/package/docker/airfocus%2Fairfocus-ci)
+# ci
 
 * Git
 * Docker client
+* git-describe-semver
 * OpenJDK JDK
 * Scala
 * SBT
