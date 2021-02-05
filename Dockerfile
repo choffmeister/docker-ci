@@ -1,11 +1,5 @@
 FROM ubuntu:20.04
 
-ENV DOCKER_VERSION="20.10.2"
-ENV GIT_DESCRIBE_SEMVER_VERSION="0.2.2"
-ENV SCALA_VERSION="2.13.4"
-ENV SBT_VERSION="1.4.6"
-ENV NODE_VERSION="14.15.4"
-
 WORKDIR /tmp
 
 # install basic tools
@@ -17,6 +11,7 @@ RUN \
   apt-get clean
 
 # install docker cli
+ENV DOCKER_VERSION="20.10.2"
 RUN \
   wget -q https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz && \
   sha1sum docker-$DOCKER_VERSION.tgz && \
@@ -27,16 +22,19 @@ RUN \
   rm docker-$DOCKER_VERSION.tgz
 
 # install git-describe-semver
+ENV GIT_DESCRIBE_SEMVER_VERSION="0.2.4"
 RUN \
   wget -q https://github.com/choffmeister/git-describe-semver/releases/download/v$GIT_DESCRIBE_SEMVER_VERSION/git-describe-semver-linux-amd64 && \
   sha1sum git-describe-semver-linux-amd64 && \
-  echo "9325e2fc616e207c0adde7f44698999c1a454cc5  git-describe-semver-linux-amd64" | sha1sum -c - && \
+  echo "a1056bc9b410ba22c926a17ab14795cac4389588  git-describe-semver-linux-amd64" | sha1sum -c - && \
   mkdir /opt/git-describe-semver && \
   mv git-describe-semver-linux-amd64 /opt/git-describe-semver && \
   chmod +x /opt/git-describe-semver/git-describe-semver-linux-amd64 && \
   ln -s /opt/git-describe-semver/git-describe-semver-linux-amd64 /usr/bin/git-describe-semver
 
 # install openjdk, scala, sbt
+ENV SCALA_VERSION="2.13.4"
+ENV SBT_VERSION="1.4.6"
 RUN \
   apt-get update && \
   apt-get install --yes openjdk-8-jdk && \
@@ -63,6 +61,7 @@ RUN \
   rm -rf project
 
 # install nodejs, npm, yarn
+ENV NODE_VERSION="14.15.4"
 RUN \
   wget -q https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz && \
   sha1sum node-v$NODE_VERSION-linux-x64.tar.xz && \
